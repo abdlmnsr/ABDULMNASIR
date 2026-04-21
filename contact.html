@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #0a0a0a; color: white; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased p-6 md:p-20">
 
 <div class="max-w-2xl mx-auto">
     <div class="mb-10">
@@ -8,137 +26,93 @@
     <form id="contactForm" class="space-y-6">
         <div class="group">
             <label class="block text-[10px] uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-blue-500 transition-colors">Nama Lengkap</label>
-            <input type="text" id="name" name="name" 
-                class="w-full bg-white/5 border-b border-white/10 p-4 focus:outline-none focus:border-blue-600 transition-all text-white"
-                placeholder="Masukkan nama Anda...">
-            <span class="error-msg text-[10px] text-red-500 mt-1 hidden italic"></span>
+            <input type="text" id="name" class="w-full bg-white/5 border-b border-white/10 p-4 focus:outline-none focus:border-blue-600 transition-all text-white" placeholder="Masukkan nama Anda...">
         </div>
 
         <div class="group">
             <label class="block text-[10px] uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-blue-500 transition-colors">Alamat Email</label>
-            <input type="email" id="email" name="email" 
-                class="w-full bg-white/5 border-b border-white/10 p-4 focus:outline-none focus:border-blue-600 transition-all text-white"
-                placeholder="email@contoh.com">
-            <span class="error-msg text-[10px] text-red-500 mt-1 hidden italic"></span>
+            <input type="email" id="email" class="w-full bg-white/5 border-b border-white/10 p-4 focus:outline-none focus:border-blue-600 transition-all text-white" placeholder="email@contoh.com">
         </div>
 
         <div class="group">
             <label class="block text-[10px] uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-blue-500 transition-colors">Pesan</label>
-            <textarea id="message" name="message" rows="4" 
-                class="w-full bg-white/5 border-b border-white/10 p-4 focus:outline-none focus:border-blue-600 transition-all text-white resize-none"
-                placeholder="Tuliskan pesan Anda di sini..."></textarea>
-            <span class="error-msg text-[10px] text-red-500 mt-1 hidden italic"></span>
+            <textarea id="message" rows="4" class="w-full bg-white/5 border-b border-white/10 p-4 focus:outline-none focus:border-blue-600 transition-all text-white resize-none" placeholder="Tuliskan pesan Anda..."></textarea>
         </div>
 
-        <button type="submit" 
-            class="w-full md:w-auto px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black uppercase text-xs tracking-widest transition-all hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+        <div id="locationCard" class="glass-card p-6 rounded-2xl flex items-center gap-5 border-l-4 border-l-blue-600 opacity-0 transition-opacity duration-1000">
+            <div class="w-12 h-12 rounded-full bg-blue-600/20 flex items-center justify-center shrink-0">
+                <i class="fas fa-location-dot text-blue-500 text-xl animate-bounce"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-1">Lokasi Anda Terdeteksi</p>
+                <h4 id="userAddress" class="text-sm font-bold text-white tracking-tight leading-tight uppercase">Mencari lokasi...</h4>
+                <p id="userCoords" class="text-[9px] text-white/20 mt-1 font-mono uppercase"></p>
+            </div>
+        </div>
+
+        <button type="submit" id="btnSubmit" class="w-full md:w-auto px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black uppercase text-xs tracking-widest transition-all hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
             Kirim Pesan
         </button>
     </form>
+
     <div class="mt-16 pt-8 border-t border-white/5">
         <p class="text-[9px] uppercase tracking-[0.3em] text-white/20 mb-6 text-center md:text-left">Connect with me</p>
         <div class="flex flex-wrap justify-center md:justify-start gap-6">
-            <a href="https://www.instagram.com/abdlmnsr" target="_blank" 
-               class="group flex items-center gap-3 text-white/40 hover:text-white transition-all">
-                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all">
-                    <i class="fab fa-instagram text-lg"></i>
-                </div>
+            <a href="https://www.instagram.com/abdlmnsr" target="_blank" class="group flex items-center gap-3 text-white/40 hover:text-white transition-all">
+                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all text-lg"><i class="fab fa-instagram"></i></div>
                 <span class="text-[10px] font-black uppercase tracking-widest hidden sm:block">Instagram</span>
             </a>
-    
-            <a href="https://www.tiktok.com/@ak.dul?_r=1&_t=ZS-95BZry55Qc3" target="_blank" 
-               class="group flex items-center gap-3 text-white/40 hover:text-white transition-all">
-                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-all">
-                    <i class="fab fa-tiktok text-lg"></i>
-                </div>
-                <span class="text-[10px] font-black uppercase tracking-widest hidden sm:block">TikTok</span>
-            </a>
-    
-            <a href="https://wa.me/6288215953809" target="_blank" 
-               class="group flex items-center gap-3 text-white/40 hover:text-white transition-all">
-                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-green-600 transition-all">
-                    <i class="fab fa-whatsapp text-lg"></i>
-                </div>
+            <a href="https://wa.me/6288215953809" target="_blank" class="group flex items-center gap-3 text-white/40 hover:text-white transition-all">
+                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-green-600 transition-all text-lg"><i class="fab fa-whatsapp"></i></div>
                 <span class="text-[10px] font-black uppercase tracking-widest hidden sm:block">WhatsApp</span>
-            </a>
-    
-            <a href="https://x.com/AbdulMuhamadNa1" target="_blank" 
-               class="group flex items-center gap-3 text-white/40 hover:text-white transition-all">
-                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                    <i class="fab fa-x-twitter text-lg"></i>
-                </div>
-                <span class="text-[10px] font-black uppercase tracking-widest hidden sm:block">Twitter</span>
             </a>
         </div>
     </div>
-    <div id="successToast" class="fixed bottom-10 right-10 bg-blue-600 text-white p-6 rounded-xl shadow-2xl hidden translate-y-20 transition-all duration-500">
-        <p class="font-bold text-sm uppercase tracking-tighter">Pesan Terkirim!</p>
-        <p class="text-[10px] opacity-80 uppercase mt-1">Terima kasih telah menghubungi saya.</p>
-    </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-    // Gunakan Key yang unik untuk aplikasi Anda
-    const STORAGE_KEY = 'contact_form_draft';
-
-    // 1. FUNGSI PEMULIHAN DATA (Restore)
-    function restoreDraft() {
-        const savedData = localStorage.getItem(STORAGE_KEY);
-        if (savedData) {
-            const data = JSON.parse(savedData);
-            // Mengisi field hanya jika data tersedia
-            if(data.name) $('#name').val(data.name);
-            if(data.email) $('#email').val(data.email);
-            if(data.message) $('#message').val(data.message);
-            console.log("Sistem: Draft berhasil dipulihkan dari penyimpanan lokal.");
+$(document).ready(function() {
+    // 1. Deteksi Lokasi via IP (Sangat Ringan & Cepat)
+    // Menggunakan API publik gratis dari ip-api.com
+    $.getJSON('http://ip-api.com/json', function(data) {
+        if(data.status === 'success') {
+            $('#userAddress').html(`${data.city}, ${data.regionName}, ${data.country}`);
+            $('#userCoords').html(`LAT: ${data.lat} | LON: ${data.lon} | ISP: ${data.isp}`);
+            $('#locationCard').removeClass('opacity-0');
+        } else {
+            $('#userAddress').text('Lokasi tidak dapat dijangkau');
         }
-    }
-
-    // 2. SIMPAN OTOMATIS (Auto-Save)
-    // Menggunakan event 'input' agar setiap ketikan langsung tersimpan
-    $(document).on('input', '#contactForm input, #contactForm textarea', function() {
-        const formData = {
-            name: $('#name').val(),
-            email: $('#email').val(),
-            message: $('#message').val()
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    }).fail(function() {
+        // Fallback jika API IP diblokir (misal karena HTTPS/Mixed Content)
+        $('#userAddress').text('Gunakan koneksi aman untuk deteksi otomatis');
     });
 
-    // 3. VALIDASI & SUBMIT
-    $(document).on('submit', '#contactForm', function(e) {
+    // 2. Draft System
+    const KEY = 'contact_draft';
+    const restore = () => {
+        const d = JSON.parse(localStorage.getItem(KEY) || '{}');
+        $('#name').val(d.n || '');
+        $('#email').val(d.e || '');
+        $('#message').val(d.m || '');
+    };
+
+    $('input, textarea').on('input', function() {
+        localStorage.setItem(KEY, JSON.stringify({
+            n: $('#name').val(), e: $('#email').val(), m: $('#message').val()
+        }));
+    });
+
+    // 3. Form Submit
+    $('#contactForm').on('submit', function(e) {
         e.preventDefault();
-        $('.error-msg').addClass('hidden').text(''); 
-
-        const name = $('#name').val().trim();
-        const email = $('#email').val().trim();
-        const message = $('#message').val().trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        let isValid = true;
-
-        if (name === "") { showError('#name', "Nama tidak boleh kosong"); isValid = false; }
-        if (!emailRegex.test(email)) { showError('#email', "Format email tidak valid"); isValid = false; }
-        if (message.length < 10) { showError('#message', "Pesan minimal 10 karakter"); isValid = false; }
-
-        if (isValid) {
-            // Simulasi Berhasil
-            showToast();
-            
-            // PENTING: Hapus draft setelah berhasil kirim
-            $('#contactForm')[0].reset();
-            localStorage.removeItem(STORAGE_KEY);
-        }
+        alert('Terima kasih! Pesan Anda telah terkirim.');
+        localStorage.removeItem(KEY);
+        location.reload();
     });
 
-    // Jalankan restore saat halaman pertama kali dimuat (jika bukan AJAX)
-    restoreDraft();
-
-    // Listener khusus untuk sistem AJAX (Single Page Application)
-    $(document).ajaxComplete(function(event, xhr, settings) {
-        if (settings.url.includes("contact.html")) {
-            restoreDraft();
-        }
-    });
+    restore();
 });
 </script>
+</body>
+</html>
