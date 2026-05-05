@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdlmnsr | Portfolio 2026</title>
+    
+    <!-- SEO & PWA Meta -->
+    <meta name="theme-color" content="#2563eb">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://via.placeholder.com/192">
+    
+    <!-- Scripts & Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
@@ -35,6 +42,7 @@
             transition: all 0.3s ease;
             opacity: 0.5;
             font-size: 0.75rem;
+            cursor: pointer;
         }
         .nav-item.active, .nav-item:hover {
             opacity: 1;
@@ -52,11 +60,18 @@
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* Mobile Menu Overlay - State Awal Tersembunyi */
+        /* Mobile Menu Overlay */
         #mobile-menu {
             display: none; 
             background: rgba(5, 5, 5, 0.98);
             backdrop-filter: blur(15px);
+            position: fixed;
+            inset: 0;
+            z-index: 105;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
         }
     </style>
 </head>
@@ -79,13 +94,14 @@
         </div>
 
         <button id="hamburger" class="md:hidden flex flex-col gap-1.5 z-[120] p-2">
-            <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
             <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
-            <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
         </button>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 z-[105] flex-col items-center justify-center gap-10">
+    <!-- Mobile Menu Container -->
+    <div id="mobile-menu">
         <a href="home.html" class="nav-item active">Home</a>
         <a href="about.html" class="nav-item">About</a>
         <a href="github.html" class="nav-item">Project</a>
@@ -94,22 +110,28 @@
         <a href="education.html" class="nav-item">Educations</a>
         <a href="certificates.html" class="nav-item">Certificates</a>
         <a href="contact.html" class="nav-item">Contact</a>
-</div>
+    </div>
 
     <main class="min-h-screen flex items-center justify-center px-4 md:px-6 pt-32 pb-12">
         <div id="content-area" class="w-full max-w-6xl content-frame">
-            </div>
+            <!-- Konten AJAX masuk di sini -->
+        </div>
     </main>
 
     <script>
         $(document).ready(function() {
             // 1. Fungsi Utama Load Page
             function loadPage(url) {
-                console.log("Memasuki sistem:", url);
+                console.log("Loading path:", url);
                 $('#content-area').fadeOut(200, function() {
                     $(this).load(url, function(response, status, xhr) {
                         if (status == "error") {
-                            $(this).html("<div class='text-center border border-red-500/50 p-10 rounded-2xl bg-red-500/10'><h2 class='text-red-500 font-black italic text-2xl'>CRITICAL ERROR</h2><p class='text-xs opacity-50 mt-2 uppercase tracking-widest'>Gagal memuat " + url + "</p></div>");
+                            $(this).html(`
+                                <div class='text-center border border-red-500/50 p-10 rounded-2xl bg-red-500/10'>
+                                    <h2 class='text-red-500 font-black italic text-2xl'>CRITICAL ERROR</h2>
+                                    <p class='text-xs opacity-50 mt-2 uppercase tracking-widest'>Gagal memuat: ${url}</p>
+                                </div>
+                            `);
                         }
                         $(this).fadeIn(400);
                         window.scrollTo(0, 0);
@@ -124,18 +146,19 @@
 
                 if (isHidden) {
                     menu.css('display', 'flex').hide().fadeIn(300);
-                    $('body').css('overflow', 'hidden'); // Kunci scroll
+                    $('body').css('overflow', 'hidden');
                 } else {
                     menu.fadeOut(300, function() {
                         $(this).css('display', 'none');
                     });
-                    $('body').css('overflow', 'auto'); // Lepas scroll
+                    $('body').css('overflow', 'auto');
                 }
 
-                // Animasi Icon Hamburger
-                $('#hamburger span:nth-child(1)').toggleClass('rotate-45 translate-y-2');
-                $('#hamburger span:nth-child(2)').toggleClass('opacity-0');
-                $('#hamburger span:nth-child(3)').toggleClass('-rotate-45 -translate-y-2');
+                // Animasi Hamburger Icon
+                const spans = $('#hamburger span');
+                $(spans[0]).toggleClass('rotate-45 translate-y-2');
+                $(spans[1]).toggleClass('opacity-0');
+                $(spans[2]).toggleClass('-rotate-45 -translate-y-2');
             }
 
             // 3. Event Listeners
@@ -143,7 +166,6 @@
                 toggleMenu();
             });
 
-            // Navigasi Link (Desktop & Mobile)
             $('#main-nav a, #mobile-menu a').click(function(e) {
                 e.preventDefault();
                 const url = $(this).attr('href');
@@ -152,7 +174,6 @@
                 $('.nav-item').removeClass('active');
                 $(`a[href="${url}"]`).addClass('active');
 
-                // Tutup menu jika sedang di mobile
                 if ($('#mobile-menu').css('display') !== 'none') {
                     toggleMenu();
                 }
@@ -163,6 +184,15 @@
             // 4. Initial Load
             loadPage('home.html');
         });
+
+        // 5. Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('SW terdaftar!', reg.scope))
+                    .catch(err => console.log('SW Gagal:', err));
+            });
+        }
     </script>
 </body>
 </html>
